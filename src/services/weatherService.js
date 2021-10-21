@@ -1,9 +1,7 @@
 import { storageService } from './storageService.js'
 
 export const weatherService = {
-    // query,
     save,
-    remove,
     searchCityByCityKey,
     searchCityAutoComplete,
     getCityCurrentCondition,
@@ -16,22 +14,8 @@ const API_KEY = 'BmFV9KHIUx2TcW2wwfyb8GWT1lOc5i2L'
 const BASE_URL = 'http://dataservice.accuweather.com'
 const gCitys = []
 
-function remove(cityId) {
-    try {
-
-        const idx = gCitys.findIndex(city => city._id === cityId)
-        gCitys.splice(idx, 1)
-        storageService.saveToStorage(STORAGE_KEY, gCitys)
-        return Promise.resolve()
-    } catch (err) {
-        const msg = err
-        return Promise.resolve(msg)
-    }
-}
-
 function save(city, cityCurrentCondition) {
     try {
-
         if (city._id) return
         const cityToSave = {
             _id: _makeId(),
