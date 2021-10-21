@@ -1,0 +1,13 @@
+.wheather-list {
+    gap: 10px;
+    margin-bottom: 10px;
+    @media (max-width: $mobile-breakpoint){
+        flex-direction: column;
+    }
+    @media (max-width: $narrow-breakpoint){
+        font-size: 14px;
+    }
+    @media (max-width: $normal-breakpoint){
+        color: yellowgreen;
+    }
+}

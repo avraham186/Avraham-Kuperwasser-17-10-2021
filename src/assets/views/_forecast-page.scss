@@ -1,0 +1,19 @@
+.forecast-page {
+    height: 85vh;
+    @media (max-width: $mobile-breakpoint) {
+        height: fit-content;
+    }
+    .current-temp{
+        margin-bottom: 15px;
+    }
+    .btn-add-to-favorit.btn-remove-from-favorit {
+        width: 200px;
+        height: 50px;
+        padding: 5px;
+        border-radius: 5px;
+    }
+}
+.dark {
+    background-color: black;
+    color: white;
+}

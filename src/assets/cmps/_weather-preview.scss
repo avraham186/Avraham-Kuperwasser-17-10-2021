@@ -1,0 +1,15 @@
+.weather-preview-card {
+    // .dark {
+    //     background-color: black;
+    //     color: white;
+    // }
+    .weather-preview {
+        padding: 10px;
+        height: 170px;
+
+        @media (max-width: $narrow-breakpoint) {
+            height: 150px;
+            font-size: 11px;
+        }
+    }
+}

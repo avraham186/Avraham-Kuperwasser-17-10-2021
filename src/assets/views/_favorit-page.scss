@@ -1,0 +1,10 @@
+.favorit-page{
+    height: 85vh;
+    @media (max-width: $mobile-breakpoint) {
+        height: fit-content;
+    }
+    &.dark{
+        background-color: black;
+        color: white;
+    }
+}

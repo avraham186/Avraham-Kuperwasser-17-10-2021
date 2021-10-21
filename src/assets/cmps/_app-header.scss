@@ -1,0 +1,30 @@
+.app-header {
+    padding: 5px 0px 5px 0px;
+    background-color: green;
+    margin-bottom: 15px;
+    .main-nav {
+        gap: 10px;
+        border-radius: 50%;
+        .links {
+            :hover {
+                transform: scale(1.08);
+            }
+            :not(:first-child) {
+                margin-left: 10px;
+            }
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    }
+    &.dark {
+        background-color: black;
+        color: white;
+        .main-nav {
+            a {
+                color: white;
+            }
+        }
+    }
+}

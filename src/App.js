@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+// import logo from './logo.svg';
+import './assets/main.scss';
+import React from 'react';
+import { Switch, Route } from 'react-router-dom'
+import { AppHeader } from './cmps/AppHeader'
+import { ForecastPage } from './pages/ForecastPage'
+import { FavoritCities } from './pages/FavoritCities'
+import { AppFooter } from './cmps/AppFooter'
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="weather-app">
+      <AppHeader />
+      <Switch>
+        <Route path="/favoritCities" component={FavoritCities} />
+        <Route path="/" component={ForecastPage} />
+      </Switch>
+      <AppFooter />
     </div>
   );
 }
-
-export default App;
