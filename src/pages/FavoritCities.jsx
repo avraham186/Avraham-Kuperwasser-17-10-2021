@@ -1,22 +1,43 @@
-import React from 'react'
-import { setCity, removeCity, errorMsg } from '../actions/weatherActions'
+import React, { useEffect, useState } from 'react'
+import { weatherService } from '../services/weatherService'
+import { setCity, errorMsg } from '../actions/weatherActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { FavoritList } from '../cmps/FavoritList'
 import { MsgModal } from '../cmps/MsgModal'
 
 export const FavoritCities = () => {
-    const { favoritCities, darkMod, degree, error } = useSelector(state => state.weatherModule)
+    const { darkMod, degree, error } = useSelector(state => state.weatherModule)
+    const [favoritCities, setFavoritCities] = useState('')
     const dispatch = useDispatch()
+
+    useEffect(async () => {
+        try {
+            const cities = await weatherService.loadCities()
+            setFavoritCities(cities)
+        } catch (err) {
+            dispatch(errorMsg(err))
+        }
+    }, [error])
 
     const isDarkMode = () => {
         return darkMod ? 'dark' : ''
     }
     const onDeleteCity = (cityId => {
-        dispatch(removeCity(cityId))
-        dispatch(errorMsg('city removed'))
+        try {
+            weatherService.remove(cityId)
+            const cities = weatherService.loadCities()
+            setFavoritCities(cities)
+            dispatch(errorMsg('city removed'))
+        } catch (err) {
+            dispatch(errorMsg(err))
+        }
     })
     const onSetCity = (cityKey) => {
-        dispatch(setCity(cityKey))
+        try {
+            dispatch(setCity(cityKey))
+        } catch (err) {
+            dispatch(errorMsg(err))
+        }
     }
     const onCloseModal = () => {
         dispatch(errorMsg(''))

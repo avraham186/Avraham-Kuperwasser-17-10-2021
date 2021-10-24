@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import './assets/main.scss';
 import React from 'react';
 import { Switch, Route } from 'react-router-dom'

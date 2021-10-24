@@ -1,7 +1,6 @@
 {
   "name": "weather-app",
   "version": "0.1.0",
-  "homepage": "https://avraham186.github.io",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.5.0",
@@ -23,8 +22,6 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-export function FavoritPreview({ favoritCity, onDeleteCity, onSetCity, isDarkMode, degree, darkMod }) {
+export function FavoritPreview({ favoritCity, onDeleteCity, onSetCity, isDarkMode, degree }) {
 
     const [temp, setTemp] = useState('')
     const [unit, setUnit] = useState('')
@@ -37,8 +37,11 @@ export function FavoritPreview({ favoritCity, onDeleteCity, onSetCity, isDarkMod
                     <span className={`favorit-preview-span ${isDarkMode()}`}>
                         {temp && <span>{temp}</span>}{temp && <span>{unit}</span>}
                     </span>
-                    <span className={`favorit-preview-span ${isDarkMode()}`}>
+                    <span className={`favorit-preview-span ${isDarkMode()} flex column justify-center align-center`}>
                         {favoritCity.cityCurrentCondition[0].WeatherText}
+                        <img
+                            src={process.env.PUBLIC_URL + `/images/${favoritCity.cityCurrentCondition[0].WeatherIcon}.png`}
+                            alt="current condition icon" />
                     </span>
                     <button className="delete-btn" onClick={(ev) => removeCity(ev)}>remove city</button>
                 </div>

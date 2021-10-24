@@ -1,5 +1,3 @@
-import { weatherService } from "../services/weatherService";
-
 export function setCity(cityKey) {
     return dispatch => {
         try {
@@ -27,27 +25,7 @@ export function setDegree(degree) {
         }
     }
 }
-export function addCity(cityKey) {
-    return async dispatch => {
-        try {
-            const cityCurrentCondition = await weatherService.getCityCurrentCondition(cityKey)
-            const city = await weatherService.searchCityByCityKey(cityKey)
-            const cityToSave = await weatherService.save(city,cityCurrentCondition)
-                dispatch({ type: 'ADD_CITY', cityToSave })
-        } catch (err) {
-            dispatch({ type: 'ERROR', err })
-        }
-    }
-}
-export function removeCity(cityId) {
-    return dispatch => {
-        try {
-            dispatch({ type: 'REMOVE_CITY', cityId })
-        } catch (err) {
-            dispatch({ type: 'ERROR', err })
-        }
-    }
-}
+
 export function errorMsg(msg) {
     return dispatch => {
         try {

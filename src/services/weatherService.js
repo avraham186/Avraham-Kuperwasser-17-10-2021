@@ -2,6 +2,8 @@ import { storageService } from './storageService.js'
 
 export const weatherService = {
     save,
+    remove,
+    loadCities,
     searchCityByCityKey,
     searchCityAutoComplete,
     getCityCurrentCondition,
@@ -14,24 +16,43 @@ const API_KEY = 'BmFV9KHIUx2TcW2wwfyb8GWT1lOc5i2L'
 const BASE_URL = 'http://dataservice.accuweather.com'
 const gCitys = []
 
-function save(city, cityCurrentCondition) {
+async function save(cityKey, cityName) {
     try {
-        if (city._id) return
+        const cityCurrentCondition = await weatherService.getCityCurrentCondition(cityKey)
         const cityToSave = {
             _id: _makeId(),
-            name: city.LocalizedName,
+            name: cityName,
             cityCurrentCondition,
-            cityKey: city.Key
+            cityKey
         }
         gCitys.push(cityToSave)
         storageService.saveToStorage(STORAGE_KEY, gCitys)
         return Promise.resolve(cityToSave);
     } catch (err) {
         const msg = err
-        return Promise.resolve(msg)
+        return Promise.reject(msg)
     }
 }
-
+function remove(cityId) {
+    try {
+        const idx = gCitys.findIndex(city => city._id === cityId)
+        gCitys.splice(idx, 1)
+        storageService.saveToStorage(STORAGE_KEY, gCitys)
+        return Promise.resolve();
+    } catch (err) {
+        const msg = err
+        throw new Error(msg)
+    }
+}
+function loadCities() {
+    try {
+        const cities = storageService.loadFromStorage(STORAGE_KEY)||[]
+        return cities;
+    } catch (err) {
+        const msg = err
+        throw new Error(msg)
+    }
+}
 async function searchCityAutoComplete(searchTerm) {
     try {
         let response = await fetch(`${BASE_URL}/locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${searchTerm}`)
@@ -43,7 +64,7 @@ async function searchCityAutoComplete(searchTerm) {
         return cities
     } catch (err) {
         const msg = (err.message);
-        Promise.resolve(msg)
+        Promise.reject(msg)
     }
 }
 async function searchCityByCityKey(cityKey) {
@@ -57,7 +78,7 @@ async function searchCityByCityKey(cityKey) {
         return city
     } catch (err) {
         const msg = (err.message)
-        Promise.resolve(msg)
+        Promise.reject(msg)
     }
 }
 
@@ -72,7 +93,7 @@ async function getCityCurrentCondition(cityKey) {
         return correntCondition
     } catch (err) {
         const msg = (err.message)
-        Promise.resolve(msg);
+        Promise.reject(msg);
     }
 }
 
@@ -90,7 +111,7 @@ async function get5DayForeCast(cityKey, isC) {
         return forecast5day
     } catch (err) {
         const msg = (err.message)
-        Promise.resolve(msg);
+        Promise.reject(msg);
     }
 }
 
@@ -105,7 +126,7 @@ async function getLatLanCoor(lat, lon) {
         return city
     } catch (err) {
         const msg = (err.message)
-        Promise.resolve(msg);
+        Promise.reject(msg);
     }
 
 }

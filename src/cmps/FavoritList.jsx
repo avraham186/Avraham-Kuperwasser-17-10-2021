@@ -7,7 +7,6 @@ export const FavoritList = ({ favoritCities, onDeleteCity, onSetCity, isDarkMode
     return (
         <div className='favorit-list flex align-center justify-center'>
             {favoritCities.map(favoritCity => {
-                // const city = oncurrentCondition(favoritCityObj.cityKey)
                 return <Card key={favoritCity._id} variant="outlined">
                     < FavoritPreview favoritCity={favoritCity}
                         onDeleteCity={onDeleteCity} onSetCity={onSetCity}

@@ -40,7 +40,7 @@ export function AppHeader() {
                     <button onClick={onSetIsDark}>Toggle Dark</button>}
                 <button onClick={degreeType}>{C_or_F}</button>
                 <div className="links flex space-between">
-                    <Link to='/'> <img src="imgs/logo.png" alt="" />weather app</Link>
+                    <Link to='/'>weather app</Link>
                     <Link to='/favoritCities'>favorit cities</Link>
                 </div>
             </nav>

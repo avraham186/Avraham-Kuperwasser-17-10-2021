@@ -1,8 +1,6 @@
 
 const initialState = {
     cityKey: '',
-    favoritCities: [],
-    currentForecast:'',
     error: '',
     darkMod:false,
     degree:'℃',
@@ -24,23 +22,6 @@ export function weatherReducer(state = initialState, action) {
             return {
                 ...state,
                 degree: action.degree
-            }
-        case 'SET_CURRENT_FORECAST':
-            return {
-                ...state,
-                currentForecast:  action.currentForecast
-            }
-        case 'ADD_CITY':
-            return {
-                ...state,
-                favoritCities: [...state.favoritCities, action.cityToSave]
-            }
-        case 'REMOVE_CITY':
-            return {
-                ...state,
-                favoritCities: state.favoritCities.filter(cityToRemove => {
-                    return cityToRemove._id !== action.cityId
-                })
             }
         case 'ERROR':
             return {
